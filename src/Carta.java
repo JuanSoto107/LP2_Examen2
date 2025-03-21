@@ -12,7 +12,11 @@ import java.awt.event.MouseAdapter;
 public class Carta {
 
     private int indice;
-    public JLabel lbl;
+    private JLabel lbl;
+    private NombreCarta n;
+    private Pinta p;
+
+
 
     // metodo constructor
     public Carta(Random r) {
@@ -34,30 +38,7 @@ public class Carta {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-
-                for(int i = 0; i <= 12; i++) {
-                    if((indice % 13) == i && i == 0) {
-                        NombreCarta nombre = NombreCarta.values()[i + 12];
-                        for(int j = 13; j <= 52; j+=13) {
-                            if(indice <= j) {
-                                Pinta pinta = Pinta.values()[(j/13) - 1];
-                                JOptionPane.showMessageDialog(null, nombre +" de "+ pinta);
-                                break;
-
-                            }
-                        }
-                    } if((indice % 13) == i) {
-                        NombreCarta nombre = NombreCarta.values()[i - 1];
-                        for(int j = 13; j <= 52; j+=13) {
-                            if(indice <= j) {
-                                Pinta pinta = Pinta.values()[(j/13) - 1];
-                                JOptionPane.showMessageDialog(null, nombre +" de "+ pinta);
-                                break;
-                            }
-                        }
-                    }
-
-                }
+                JOptionPane.showMessageDialog(null, getnombre() + " de " + getpinta());
             }
 
         });
@@ -65,31 +46,27 @@ public class Carta {
         pnl.add(lbl);
     }
 
-    public void verificar(JPanel pnl) {
 
-        for(int i = 0; i <= 12; i++) {
-            if((indice % 13) == i && i == 0) {
-                NombreCarta nombre = NombreCarta.values()[i + 12];
-                for(int j = 13; j <= 52; j+=13) {
-                    if(indice <= j) {
-                        Pinta pinta = Pinta.values()[(j/13) - 1];
-                        JOptionPane.showMessageDialog(null, nombre+" de "+pinta);
-                        break;
-
-                    }
-                }
-            } if((indice % 13) == i && i != 0) {
-                NombreCarta nombre = NombreCarta.values()[i - 1];
-                for(int j = 13; j <= 52; j+=13) {
-                    if(indice <= j) {
-                        Pinta pinta = Pinta.values()[(j/13) - 1];
-                        JOptionPane.showMessageDialog(null, nombre+" de "+pinta);
-                        break;
-                    }
-                }
-            }
-
+    public NombreCarta getnombre() {
+        int residuo = indice % 13;
+        if(residuo == 0) {
+            residuo = 13;
         }
+
+        return NombreCarta.values()[residuo - 1];
+    }
+
+    public Pinta getpinta() {
+        if(indice <= 13) {
+            return Pinta.TREBOL;
+        } else if(indice <= 26) {
+            return Pinta.PICA;
+        } else if(indice <= 39) {
+            return Pinta.CORAZONES;
+        } else {
+            return Pinta.DIAMANTES;
+        }
+
     }
 
 

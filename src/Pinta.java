@@ -2,7 +2,7 @@ public enum Pinta {
     
     TREBOL,
     PICA,
-    CORAZON,
-    DIAMANTE
+    CORAZONES,
+    DIAMANTES
 
 }

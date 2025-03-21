@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class FrmJuego extends JFrame {
 
@@ -75,12 +76,20 @@ public class FrmJuego extends JFrame {
     }
 
     private void btnVerificarClick(ActionEvent evt) {
-        if(pnlJugador1.isShowing()) {
-            jugador1.verificar(pnlJugador1);
-        }
+        switch (tpJugadores.getSelectedIndex()) {
+            case 0:
+            JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+            JOptionPane.showMessageDialog(null, jugador1.getEscalareal());
+            JOptionPane.showMessageDialog(null, jugador1.getEscalacolor());
+            JOptionPane.showMessageDialog(null, jugador1.getPoker());
+            break;
 
-        if(pnlJugador2.isShowing()) {
-            jugador2.verificar(pnlJugador2);
+            case 1:
+            JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+            JOptionPane.showMessageDialog(null, jugador2.getEscalareal());
+            JOptionPane.showMessageDialog(null, jugador2.getEscalacolor());
+            JOptionPane.showMessageDialog(null, jugador2.getPoker());
+            break;
         }
 
     }

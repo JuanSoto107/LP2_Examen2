@@ -1,6 +1,6 @@
-public enum NombreCarta {
-    
-    AS,
+public enum Constantes {
+    CERO,
+    UNO,
     DOS,
     TRES,
     CUATRO,
@@ -9,9 +9,6 @@ public enum NombreCarta {
     SIETE,
     OCHO,
     NUEVE,
-    DIEZ,
-    JACK,
-    QUEEN,
-    KING
+    DIEZ
 
 }
