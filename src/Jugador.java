@@ -15,8 +15,6 @@ public class Jugador {
     private int MARGEN = 10;
     private int DISTANCIA = 40;
 
-
-
     private Carta[] cartas = new Carta[TOTAL_CARTAS];
 
     Random r = new Random();
@@ -77,44 +75,12 @@ public class Jugador {
         return mensaje;
     }
 
-    public String getEscalareal() {
+    public String getEscalacolor() { //Obtiene si existe un conjunto de 5 cartas o mas con el misma pinta
 
-        String manos = "No tienes escala real";
-        int[] contnombre = new int[NombreCarta.values().length];
+        String color = "No tienes escala de color";
         int[] contpinta = new int[Pinta.values().length];
 
         for(Carta c : cartas) {
-            contnombre[c.getnombre().ordinal()]++;
-        }
-
-        int i = 0;
-        for(int c : contnombre) {
-            if(c == 1 && contnombre[i] >= 10) {
-                manos = "Escalera real: \n";
-                manos += NombreCarta.values()[i];
-
-            }
-            if(i == 0) {
-                if(c == 1) {
-                    manos += NombreCarta.values()[i];
-                    break;
-    
-                }
-            }
-            i++;
-        }
-
-        return manos;
-    }
-
-    public String getEscalacolor() {
-
-        String manos1 = "No tienes escala de color";
-        int[] contnombre = new int[NombreCarta.values().length];
-        int[] contpinta = new int[Pinta.values().length];
-
-        for(Carta c : cartas) {
-            contnombre[c.getnombre().ordinal()]++;
             contpinta[c.getpinta().ordinal()]++;
         }
 
@@ -122,21 +88,20 @@ public class Jugador {
         for(int p : contpinta) {
 
             if(p >= 5) {
-                manos1 = "Escala de color: \n";
-                manos1 += Constantes.values()[p] +" de "+ Pinta.values()[i] +"\n";
+                color = "Escala de color: \n";
+                color += Grupo.values()[p] +" de "+ Pinta.values()[i] +"\n";
 
             }
             i++;
         }
 
-        return manos1;
+        return color;
     }
 
-    public String getPoker() {
+    public String getPoker() { //Obtiene si existe una combinacion de cuatro cartas del mismo numero en la baraja
 
-        String manos2 = "No tienes poker";
+        String poker = "No tienes poker";
         int[] contnombre = new int[NombreCarta.values().length];
-        int[] contpinta = new int[Pinta.values().length];
 
         for(Carta c : cartas) {
             contnombre[c.getnombre().ordinal()]++;
@@ -145,16 +110,67 @@ public class Jugador {
         int i = 0;
         for(int c : contnombre) {
             if(c == 4) {
-                manos2 = "Poker de: \n";
-                manos2 += NombreCarta.values()[i];
+                poker = "Poker de: \n";
+                poker += NombreCarta.values()[i];
             }
             i++;
         }
 
-        return manos2;
+        return poker;
 
 
     }
 
+    public String getPuntaje() {
+
+        String puntaje = "No";
+
+        int[] contnombre = new int[NombreCarta.values().length];
+
+        for(Carta c : cartas) {
+            contnombre[c.getnombre().ordinal()]++;
+        }
+
+        int[] total = new int[contnombre.length];
+
+
+        for(Carta c : cartas) {
+            if(c.getnombre().ordinal() == 0) {
+                total[0] = 10;
+            }
+            for(int j = 9; j <= 12;) {
+                if(c.getnombre().ordinal() == j) {
+                    total[j] = 10;
+                }
+                j++;
+            }
+            for(int j = 1; j <= 8;) {
+                if(c.getnombre().ordinal() == j) {
+                    total[j] = j + 1;
+                }
+                j++;
+            }
+        }
+
+        int i = 0;
+        for(int c : contnombre) {
+            total[i] *= c;
+            i++;
+        }
+
+        int puntuacion = 0;
+
+        for(int d = 0; d < total.length; d++) {
+
+            puntuacion += total[d];
+        }
+
+        puntaje = "Puntuacion del jugador: \n";
+        puntaje += String.valueOf(puntuacion);
+
+
+        return puntaje;
+
+    }
 
 }

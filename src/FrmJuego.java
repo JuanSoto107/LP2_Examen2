@@ -76,21 +76,27 @@ public class FrmJuego extends JFrame {
     }
 
     private void btnVerificarClick(ActionEvent evt) {
-        switch (tpJugadores.getSelectedIndex()) {
-            case 0:
-            JOptionPane.showMessageDialog(null, jugador1.getGrupos());
-            JOptionPane.showMessageDialog(null, jugador1.getEscalareal());
-            JOptionPane.showMessageDialog(null, jugador1.getEscalacolor());
-            JOptionPane.showMessageDialog(null, jugador1.getPoker());
-            break;
 
-            case 1:
-            JOptionPane.showMessageDialog(null, jugador2.getGrupos());
-            JOptionPane.showMessageDialog(null, jugador2.getEscalareal());
-            JOptionPane.showMessageDialog(null, jugador2.getEscalacolor());
-            JOptionPane.showMessageDialog(null, jugador2.getPoker());
-            break;
+        try {
+            switch (tpJugadores.getSelectedIndex()) {
+                case 0:
+                JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+                JOptionPane.showMessageDialog(null, jugador1.getEscalacolor());
+                JOptionPane.showMessageDialog(null, jugador1.getPoker());
+                JOptionPane.showMessageDialog(null, jugador1.getPuntaje());
+                break;
+    
+                case 1:
+                JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+                JOptionPane.showMessageDialog(null, jugador2.getEscalacolor());
+                JOptionPane.showMessageDialog(null, jugador2.getPoker());
+                JOptionPane.showMessageDialog(null, jugador2.getPuntaje());
+                break;
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "¡Primero debes repartir \nantes de verificar! :)");
         }
+
 
     }
 
